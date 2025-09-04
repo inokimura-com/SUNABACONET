@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>（店名）｜ミルクたっぷりカフェオレとこだわりの豆</title>
+  <title>カフェ オレオレ｜ミルクたっぷりカフェオレとこだわりの豆</title>
   <meta name="description" content="ミルクたっぷりのカフェオレと、こだわりの豆が自慢のカフェ。営業時間・アクセス・メニュー情報はこちら。">
-  <meta property="og:title" content="（店名）｜ミルクたっぷりカフェオレとこだわりの豆">
+  <meta property="og:title" content="カフェ オレオレ｜ミルクたっぷりカフェオレとこだわりの豆">
   <meta property="og:description" content="営業時間・アクセス・メニュー情報はこちら。">
   <meta property="og:type" content="website">
   <meta name="format-detection" content="telephone=no">
@@ -83,17 +83,17 @@
 </head>
 <body>
 
-<!-- ====== ① ここだけ書き換えれば全体に反映されます（仮データ入り） ====== -->
+<!-- ===== ダミーデータ（必要に応じて差し替え） ===== -->
 <script>
   const DATA = {
     name: "カフェ オレオレ",
     catch: "ミルクたっぷりカフェオレと、こだわりの豆",
     sub: "濃いめのエスプレッソ×たっぷりミルク。深いのに軽い一杯をどうぞ。",
     address: "〒810-0001 福岡県福岡市中央区天神1-1-1 1F",
-    nearest: "天神駅 徒歩5分",
+    nearest: "西鉄福岡（天神）駅 徒歩5分",
     parking: "あり（2台）",
-    phone: "092-000-0000",
-    email: "info@example.com",
+    phone: "092-123-4567",
+    email: "hello@oreore-cafe.example",
     openHours: [
       {d:"月", h:"10:00–18:00"},
       {d:"火", h:"10:00–18:00"},
@@ -108,7 +108,7 @@
       latte:    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
       beans:    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop",
       interior: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?q=80&w=1200&auto=format&fit=crop",
-      owner:    "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=600&auto=format&fit=crop" // 店主の顔（フリー素材）
+      owner:    "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=600&auto=format&fit=crop"
     },
     features: [
       {title:"ミルクたっぷりカフェオレ", text:"甘さ控えめでも満足感。濃いめのエスプレッソにスチームミルクをたっぷり。", img:"latte"},
@@ -116,10 +116,12 @@
       {title:"くつろぎ空間", text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。", img:"interior"},
     ],
     menu: [
-      {name:"カフェオレ（ホット）", price:"¥520", note:"ミルク多めが人気"},
-      {name:"ハウスブレンド（ドリップ）", price:"¥480", note:"香りと甘みのバランス"},
-      {name:"ハニーラテ（季節）", price:"¥560", note:"+50円でミルク多め可"},
-      {name:"チーズケーキ（数量限定）", price:"¥420", note:"自家製"}
+      {name:"カフェオレ（ホット）",         price:"¥520", note:"ミルク多めが人気"},
+      {name:"カフェオレ（アイス）",         price:"¥540", note:"夏季おすすめ"},
+      {name:"ハウスブレンド（ドリップ）",   price:"¥480", note:"香りと甘みのバランス"},
+      {name:"シングルオリジン（季節）",     price:"¥520", note:"産地表示・数量限定"},
+      {name:"自家製チーズケーキ",           price:"¥420", note:"数量限定"},
+      {name:"焼き菓子セット（ドリンク割）", price:"¥780", note:"ドリンク+¥200でセット"}
     ],
     news: [
       "季節限定：ハニーラテ販売中",
@@ -131,12 +133,12 @@
       intro: "バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。",
     },
     sns: {
-      instagram: "https://instagram.com/",
-      x: "https://x.com/",
+      instagram: "https://instagram.com/cafe_oreore",
+      x: "https://x.com/cafe_oreore",
     }
   };
 </script>
-<!-- ========================================================= -->
+<!-- =============================================== -->
 
 <header>
   <div class="bar">
@@ -247,7 +249,7 @@
   </div>
 </footer>
 
-<!-- Wireframe 表示切替（必要なければこのボタンと対応CSSを削除してOK） -->
+<!-- Wireframe 表示切替（任意） -->
 <button id="toggle" aria-pressed="false" title="ワイヤーフレーム表示の切替">Wireframe: OFF</button>
 
 <script>
@@ -340,7 +342,7 @@
   btn.addEventListener('click', ()=>{ wf = !wf; setWF(wf); });
 </script>
 
-<!--（任意）簡易の構造化データ：検索での店舗情報理解を助けます -->
+<!-- 構造化データ（ダミー） -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -353,7 +355,7 @@
     "postalCode": "810-0001",
     "addressCountry": "JP"
   },
-  "telephone": "092-000-0000",
+  "telephone": "092-123-4567",
   "url": "",
   "servesCuisine": "Coffee",
   "openingHoursSpecification": [
@@ -363,6 +365,10 @@
     {"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday"],"opens":"10:00","closes":"18:00"},
     {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday"],"opens":"10:00","closes":"18:00"},
     {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"10:00","closes":"19:00"}
+  ],
+  "sameAs": [
+    "https://instagram.com/cafe_oreore",
+    "https://x.com/cafe_oreore"
   ]
 }
 </script>
