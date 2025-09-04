@@ -38,7 +38,7 @@
 
     /* Hero */
     .hero{
-      position:relative; min-height:56vh; display:grid; place-items:center; text-align:center; color:white;
+      position:relative; min-height:52vh; display:grid; place-items:center; text-align:center; color:white;
       background: url('') center/cover no-repeat;
     }
     .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.55));}
@@ -48,26 +48,27 @@
     .hero p{margin:0 auto; max-width:740px; opacity:.95}
     .cta-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px}
 
-    /* Sections */
-    .wrap{max-width:1100px; margin: -32px auto 64px; padding:0 20px}
-    .grid{display:grid; gap:18px}
+    /* Layout & Spacing */
+    .wrap{max-width:1100px; margin:32px auto 96px; padding:0 24px}
+    .wrap > section{margin:28px 0;}               /* 各セクション上下の間隔 */
+    .grid{display:grid; gap:28px}                  /* セクション内の間隔 18→28 */
     .two{grid-template-columns:1fr}
     .three{grid-template-columns:1fr}
     @media (min-width:780px){ .two{grid-template-columns:1fr 1fr} .three{grid-template-columns:repeat(3,1fr)} }
 
-    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:22px}
-    h2{font-size: clamp(22px, 3.5vw, 28px); margin:6px 0 14px}
+    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px} /* 22→26 */
+    h2{font-size: clamp(22px, 3.5vw, 28px); margin:6px 0 16px}
     .lead{color:var(--mute); margin-top:-6px}
     .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:#f2e7db; color:#3d2a19; font-size:12px; margin-right:8px}
 
     /* Tables */
     table{width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden}
-    th,td{padding:10px 12px; text-align:left}
+    th,td{padding:12px 14px; text-align:left}
     tr:nth-child(even){background:#faf6f1}
     th{background:#efe2d3; white-space:nowrap}
 
     /* Images */
-    .img-fit{width:100%; height:220px; object-fit:cover; border-radius:12px}
+    .img-fit{width:100%; height:240px; object-fit:cover; border-radius:12px} /* 220→240 */
     .avatar{width:88px; height:88px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:var(--shadow)}
 
     /* Footer */
@@ -75,7 +76,7 @@
     .sns{display:flex; gap:10px; justify-content:center; margin-top:8px}
     .sns a{display:inline-block; padding:8px 12px; border-radius:10px; background:#f1e5d9; color:#5a3e26}
 
-    /* Wireframe toggle (optional) */
+    /* Optional: Wireframe */
     .wf .card, .wf header, .wf .hero, .wf .img-fit, .wf .avatar{ background:#f6f6f6 !important; border:2px dashed #bdbdbd; box-shadow:none }
     .wf .hero::after{ background:transparent }
     #toggle{ position:fixed; right:12px; bottom:12px; z-index:20; border:1px solid #bdbdbd; background:#fff; border-radius:10px; padding:10px 12px }
@@ -203,7 +204,7 @@
   <section class="card" aria-labelledby="map">
     <h2 id="map">地図</h2>
     <div style="border-radius:12px; overflow:hidden; box-shadow:var(--shadow)">
-      <iframe id="mapFrame" title="Google Map" width="100%" height="340" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe id="mapFrame" title="Google Map" width="100%" height="360" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 
@@ -290,6 +291,7 @@
   const menuUl = document.getElementById('menuList');
   DATA.menu.forEach(m=>{
     const li = document.createElement('li');
+    li.style.margin = "6px 0";
     li.innerHTML = `<strong>${m.name}</strong> …… ${m.price}` + (m.note ? ` <span style="color:#8a6b52">（${m.note}）</span>` : "");
     menuUl.appendChild(li);
   });
@@ -323,7 +325,7 @@
 
   // ===== お知らせ =====
   const newsUl = document.getElementById('newsList');
-  DATA.news.forEach(t=>{ const li=document.createElement('li'); li.textContent = t; newsUl.appendChild(li); });
+  DATA.news.forEach(t=>{ const li=document.createElement('li'); li.textContent = t; li.style.margin="6px 0"; newsUl.appendChild(li); });
 
   // ===== フッター / SNS =====
   document.getElementById('year').textContent = new Date().getFullYear();
