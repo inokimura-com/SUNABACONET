@@ -32,10 +32,9 @@
     .hero p{margin:0 auto;max-width:740px;opacity:.95}
     .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 
-    /* Common layout ーーー★ 間隔を広げました */
-    .wrap{max-width:1100px;margin:36px auto;padding:0 22px}
-    .wrap > section{margin:34px 0;}     /* セクション間の“間” */
-    .grid{display:grid;gap:28px}        /* セクション内の“間”を少し広く */
+    /* Common layout */
+    .wrap{max-width:1100px;margin:32px auto;padding:0 20px}
+    .grid{display:grid;gap:24px}
     .two{grid-template-columns:1fr}
     .three{grid-template-columns:1fr}
     @media (min-width:780px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}}
@@ -69,11 +68,11 @@
     .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
 
     /* Info summary */
-    .info-grid{display:grid;gap:16px}
+    .info-grid{display:grid;gap:14px}
     @media(min-width:780px){.info-grid{grid-template-columns:1fr 1fr}}
     .info-item{padding:14px;border:1px solid #eee;border-radius:12px;background:#fff}
 
-    footer{padding:32px 18px 56px;text-align:center;color:#8a8a8a}
+    footer{padding:28px 18px 48px;text-align:center;color:#8a8a8a}
   </style>
 </head>
 <body>
@@ -101,14 +100,10 @@
       interior:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
       owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop"
     },
-    /* ★ 追加：メニューのダミーデータ（6品） */
-    menu:[
-      {name:"カフェオレ（ホット）", price:"¥520", note:"ミルク多めが人気"},
-      {name:"カフェオレ（アイス）", price:"¥540", note:"夏季おすすめ"},
-      {name:"ハウスブレンド（ドリップ）", price:"¥480", note:"香りと甘みのバランス"},
-      {name:"エスプレッソ（ダブル）", price:"¥420", note:"力強いコク"},
-      {name:"シングルオリジン（季節）", price:"¥560", note:"産地表示・数量限定"},
-      {name:"自家製チーズケーキ", price:"¥420", note:"数量限定"}
+    features:[
+      {title:"ミルクたっぷりカフェオレ",text:"甘さ控えめでも満足感。濃いめのエスプレッソにスチームミルクをたっぷり。",img:"latte"},
+      {title:"こだわりの豆",text:"中深煎り中心、季節のシングルも入替。ハンドドリップで丁寧に抽出。",img:"beans"},
+      {title:"くつろぎ空間",text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。",img:"interior"}
     ],
     news:[
       "季節限定：ハニーラテ販売中",
@@ -321,8 +316,8 @@
   const closed = DATA.openHours.find(x=>x.h==="定休日")?.d || "";
   document.getElementById('sumHours').textContent = `平日 ${weekday} ／ 土 ${sat} ／ 日・祝 ${sun}` + (closed?`（${closed} 定休）`:"");
 
-  document.getElementById('sumInsta').href = DATA.sns?.instagram || "#";
-  document.getElementById('sumX').href = DATA.sns?.x || "#";
+  document.getElementById('sumInsta').href = DATA.sns.instagram || "#";
+  document.getElementById('sumX').href = DATA.sns.x || "#";
   document.getElementById('sumMap').href = mapHref;
 </script>
 </body>
