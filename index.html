@@ -13,7 +13,7 @@
   <style>
     :root{
       --bg:#fff8f2; --card:#ffffff; --ink:#2c2c2c; --mute:#6b6b6b;
-      --accent:#8b5e34; --accent-2:#c9a27a; --radius:18px;
+      --accent:#8b5e34; --radius:18px;
       --shadow:0 10px 25px rgba(0,0,0,.08);
     }
     *{box-sizing:border-box}
@@ -48,18 +48,17 @@
     .hero p{margin:0 auto; max-width:740px; opacity:.95}
     .cta-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px}
 
-    /* Layout & Spacing */
-    .wrap{max-width:1100px; margin:32px auto 96px; padding:0 24px}
-    .wrap > section{margin:28px 0;}               /* 各セクション上下の間隔 */
-    .grid{display:grid; gap:28px}                  /* セクション内の間隔 18→28 */
+    /* Layout & spacing (mobile base) */
+    .wrap{max-width:1100px; margin:28px auto 80px; padding:0 20px}
+    .wrap > section{margin:24px 0;}
+    .grid{display:grid; gap:24px}
     .two{grid-template-columns:1fr}
     .three{grid-template-columns:1fr}
-    @media (min-width:780px){ .two{grid-template-columns:1fr 1fr} .three{grid-template-columns:repeat(3,1fr)} }
-
-    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px} /* 22→26 */
+    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px}
     h2{font-size: clamp(22px, 3.5vw, 28px); margin:6px 0 16px}
     .lead{color:var(--mute); margin-top:-6px}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:#f2e7db; color:#3d2a19; font-size:12px; margin-right:8px}
+    .img-fit{width:100%; height:220px; object-fit:cover; border-radius:12px}
+    .avatar{width:88px; height:88px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:var(--shadow)}
 
     /* Tables */
     table{width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden}
@@ -67,19 +66,26 @@
     tr:nth-child(even){background:#faf6f1}
     th{background:#efe2d3; white-space:nowrap}
 
-    /* Images */
-    .img-fit{width:100%; height:240px; object-fit:cover; border-radius:12px} /* 220→240 */
-    .avatar{width:88px; height:88px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:var(--shadow)}
-
     /* Footer */
     footer{padding:28px 18px 48px; text-align:center; color:#8a8a8a}
     .sns{display:flex; gap:10px; justify-content:center; margin-top:8px}
     .sns a{display:inline-block; padding:8px 12px; border-radius:10px; background:#f1e5d9; color:#5a3e26}
 
-    /* Optional: Wireframe */
-    .wf .card, .wf header, .wf .hero, .wf .img-fit, .wf .avatar{ background:#f6f6f6 !important; border:2px dashed #bdbdbd; box-shadow:none }
-    .wf .hero::after{ background:transparent }
-    #toggle{ position:fixed; right:12px; bottom:12px; z-index:20; border:1px solid #bdbdbd; background:#fff; border-radius:10px; padding:10px 12px }
+    /* --- Desktop tuning: 1024px以上で縦長感を抑える --- */
+    @media (min-width:780px){
+      .two{grid-template-columns:1fr 1fr}
+      .three{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (min-width:1024px){
+      .hero{ min-height:46vh; }            /* ヒーローをやや低く */
+      .hero-inner{ padding:44px 20px; }    /* 余白も少し圧縮 */
+      .wrap{ margin:24px auto 64px; padding:0 24px; }
+      .wrap > section{ margin:20px 0; }    /* セクション間隔を短縮 */
+      .grid{ gap:20px; }                   /* ブロック間隔を短縮 */
+      .card{ padding:22px; }               /* カード内余白を短縮 */
+      .img-fit{ height:200px; }            /* 画像の縦を少し詰める */
+      th,td{ padding:10px 12px; }          /* 表の行高を軽くする */
+    }
   </style>
 </head>
 <body>
@@ -204,7 +210,7 @@
   <section class="card" aria-labelledby="map">
     <h2 id="map">地図</h2>
     <div style="border-radius:12px; overflow:hidden; box-shadow:var(--shadow)">
-      <iframe id="mapFrame" title="Google Map" width="100%" height="360" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe id="mapFrame" title="Google Map" width="100%" height="340" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 
@@ -254,10 +260,9 @@
 <button id="toggle" aria-pressed="false" title="ワイヤーフレーム表示の切替">Wireframe: OFF</button>
 
 <script>
-  // ===== ユーティリティ =====
   const enc = s => encodeURIComponent(s);
 
-  // ===== ヘッダー / HERO =====
+  // ヘッダー / HERO
   document.getElementById('brandTitle').textContent = DATA.name;
   document.getElementById('footerName').textContent = DATA.name;
   document.getElementById('h1').textContent = DATA.catch;
@@ -272,7 +277,7 @@
   document.getElementById('telBtn').href = telHref;
   document.getElementById('mapBtn').href = mapHref;
 
-  // ===== こだわり（3つの売り） =====
+  // こだわり
   const featureWrap = document.getElementById('featureList');
   DATA.features.forEach(f=>{
     const card = document.createElement('div');
@@ -287,7 +292,7 @@
   });
   document.getElementById('featureMainImg').src = DATA.images.latte;
 
-  // ===== メニュー =====
+  // メニュー
   const menuUl = document.getElementById('menuList');
   DATA.menu.forEach(m=>{
     const li = document.createElement('li');
@@ -296,7 +301,7 @@
     menuUl.appendChild(li);
   });
 
-  // ===== 営業時間 / 基本情報 =====
+  // 営業時間 / 基本情報
   const tbl = document.getElementById('hoursTable');
   DATA.openHours.forEach(r=>{
     const tr = document.createElement('tr');
@@ -310,37 +315,36 @@
   const mailLink = document.getElementById('mailLink'); mailLink.href = "mailto:"+DATA.email; mailLink.textContent = DATA.email;
   document.getElementById('mapBtn2').href = mapHref;
 
-  // ===== 地図（埋め込み） =====
+  // 地図
   document.getElementById('mapFrame').src = "https://www.google.com/maps?q=" + enc(DATA.address) + "&output=embed";
 
-  // ===== 店主紹介 =====
+  // 店主紹介
   document.getElementById('ownerImg').src = DATA.images.owner;
   document.getElementById('ownerName').textContent = DATA.owner.name;
   document.getElementById('ownerIntro').textContent = DATA.owner.intro;
 
-  // ===== ギャラリー =====
+  // ギャラリー
   document.getElementById('g1').src = DATA.images.latte;
   document.getElementById('g2').src = DATA.images.beans;
   document.getElementById('g3').src = DATA.images.interior;
 
-  // ===== お知らせ =====
+  // お知らせ
   const newsUl = document.getElementById('newsList');
   DATA.news.forEach(t=>{ const li=document.createElement('li'); li.textContent = t; li.style.margin="6px 0"; newsUl.appendChild(li); });
 
-  // ===== フッター / SNS =====
+  // フッター / SNS
   document.getElementById('year').textContent = new Date().getFullYear();
   document.getElementById('insta').href = DATA.sns.instagram || "#";
   document.getElementById('xlink').href   = DATA.sns.x || "#";
 
-  // ===== Wireframe 切替 =====
+  // Wireframe 切替
   const btn=document.getElementById('toggle');
   function setWF(on){
     document.body.classList.toggle('wf', on);
     btn.textContent = "Wireframe: " + (on ? "ON" : "OFF");
     btn.setAttribute('aria-pressed', on);
   }
-  let wf = false; // 初期はOFF（完成見た目）
-  setWF(wf);
+  let wf = false; setWF(wf);
   btn.addEventListener('click', ()=>{ wf = !wf; setWF(wf); });
 </script>
 
