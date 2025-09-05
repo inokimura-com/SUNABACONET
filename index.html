@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>カフェ オレオレ｜ミルクたっぷりカフェオレとこだわりの豆</title>
-  <meta name="description" content="ミルクたっぷりのカフェオレと、こだわりの豆が自慢のカフェ。営業時間・アクセス・メニュー情報はこちら。">
-
+  <meta name="description" content="ミルクたっぷりのカフェオレと、こだわりの豆が自慢のカフェ。営業時間・アクセス・メニュー・お問い合わせはこちら。">
   <style>
     :root{
       --bg:#fff8f2; --card:#ffffff; --ink:#2c2c2c; --mute:#6b6b6b;
@@ -46,28 +45,21 @@
     h2{font-size:clamp(22px,3.5vw,28px);margin:6px 0 16px}
     .lead{color:var(--mute)}
 
-    /* === 当店のこだわり：横幅めいっぱい1枚カード === */
+    /* 当店のこだわり（横幅めいっぱい1枚カード） */
     .about-card{padding:26px}
     .about-top{margin-bottom:16px}
     .about-grid{display:grid;gap:20px}
     .feature-cards{display:grid;gap:18px}
     .feature-card{padding:18px;border-radius:16px;box-shadow:var(--shadow);background:#fff}
     .feature-card .img{width:100%;height:170px;object-fit:cover;border-radius:12px}
-
-    /* 右側は写真コラージュ（3枚） */
-    .about-photo .photo-grid{display:grid;gap:12px;grid-template-areas:
-      "A A B"
-      "A A C";}
+    .about-photo .photo-grid{display:grid;gap:12px;grid-template-areas:"A A B" "A A C"}
     .about-photo .phA{grid-area:A}
     .about-photo .phB{grid-area:B}
     .about-photo .phC{grid-area:C}
     .about-photo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
-    .about-photo{display:block}
-
     @media (min-width:1024px){
       .about-grid{grid-template-columns:1.2fr 1fr;align-items:start}
       .feature-cards{grid-template-columns:repeat(3,1fr)}
-      .feature-card .img{height:170px}
     }
 
     /* Tables */
@@ -76,14 +68,25 @@
     tr:nth-child(even){background:#faf6f1}
     th{background:#efe2d3;white-space:nowrap}
 
-    /* Gallery */
-    .img-fit{width:100%;height:220px;object-fit:cover;border-radius:12px}
-    .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
+    /* Contact */
+    .contact-form form{display:grid;gap:12px;max-width:760px}
+    .row{display:grid;gap:12px}
+    @media(min-width:640px){.row{grid-template-columns:1fr 1fr}}
+    input,textarea{width:100%;padding:12px 14px;border:1px solid #e3d8cb;border-radius:12px;font:inherit}
+    textarea{min-height:140px;resize:vertical}
+    .note{color:#8a7c6f;font-size:14px}
+
+    /* Info summary */
+    .info-grid{display:grid;gap:14px}
+    @media(min-width:780px){.info-grid{grid-template-columns:1fr 1fr}}
+    .info-item{padding:14px;border:1px solid #eee;border-radius:12px;background:#fff}
+
+    footer{padding:28px 18px 48px;text-align:center;color:#8a8a8a}
   </style>
 </head>
 <body>
 
-<!-- ====== ダミーデータ（必要に応じて変更） ====== -->
+<!-- ====== ダミーデータ ====== -->
 <script>
   const DATA = {
     name:"カフェ オレオレ",
@@ -101,25 +104,18 @@
     ],
     heroImg:"https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
     images:{
-      latte:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop",   /* 新：ラテアート上面 */
-      beans:"https://images.unsplash.com/photo-1461988091159-192b6df7054f?q=80&w=1200&auto=format&fit=crop",  /* 新：焙煎豆 */
-      interior:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop", /* 新：店内 */
-      owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",     /* 店主イメージ */
-      collage1:"https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1200&auto=format&fit=crop", /* ドリップ */
-      collage2:"https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=800&auto=format&fit=crop",  /* カップ */
-      collage3:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=800&auto=format&fit=crop"   /* 焙煎機/豆 */
+      latte:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop",
+      beans:"https://images.unsplash.com/photo-1461988091159-192b6df7054f?q=80&w=1200&auto=format&fit=crop",
+      interior:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
+      owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",
+      collage1:"https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1200&auto=format&fit=crop",
+      collage2:"https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=800&auto=format&fit=crop",
+      collage3:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=800&auto=format&fit=crop"
     },
     features:[
       {title:"ミルクたっぷりカフェオレ",text:"甘さ控えめでも満足感。濃いめのエスプレッソにスチームミルクをたっぷり。",img:"latte"},
       {title:"こだわりの豆",text:"中深煎り中心、季節のシングルも入替。ハンドドリップで丁寧に抽出。",img:"beans"},
       {title:"くつろぎ空間",text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。",img:"interior"}
-    ],
-    menu:[
-      {name:"カフェオレ（ホット）",price:"¥520",note:"ミルク多めが人気"},
-      {name:"カフェオレ（アイス）",price:"¥540",note:"夏季おすすめ"},
-      {name:"ハウスブレンド（ドリップ）",price:"¥480",note:"香りと甘みのバランス"},
-      {name:"シングルオリジン（季節）",price:"¥520",note:"産地表示・数量限定"},
-      {name:"自家製チーズケーキ",price:"¥420",note:"数量限定"}
     ],
     news:[
       "季節限定：ハニーラテ販売中",
@@ -152,7 +148,7 @@
 
 <main class="wrap">
 
-  <!-- === 当店のこだわり（横幅めいっぱいの1枚カード） === -->
+  <!-- 当店のこだわり -->
   <section class="card about-card" aria-labelledby="about">
     <div class="about-top">
       <h2 id="about">当店のこだわり</h2>
@@ -160,8 +156,6 @@
     </div>
     <div class="about-grid">
       <div class="feature-cards" id="featureCards"></div>
-
-      <!-- 右：コラージュ（3枚）。※「三杯の写真」は使用していません -->
       <div class="about-photo">
         <div class="photo-grid">
           <img class="phA" id="phA" alt="ドリップの写真">
@@ -197,34 +191,65 @@
     </div>
   </section>
 
-  <!-- 店主紹介（復活） -->
+  <!-- 店主紹介 -->
   <section class="card" aria-labelledby="owner">
     <h2 id="owner">店主紹介</h2>
     <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
       <img id="ownerImg" class="avatar" src="" alt="店主の写真（フリー素材）">
+      <div><p><strong id="ownerName">店主</strong></p><p id="ownerIntro"></p></div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ（新設） -->
+  <section class="card contact-form" aria-labelledby="contact">
+    <h2 id="contact">お問い合わせ</h2>
+    <p class="lead">ご予約・メニュー・テイクアウトのご相談など、お気軽にどうぞ。</p>
+    <form id="contactForm">
+      <div class="row">
+        <div>
+          <label for="name">お名前</label>
+          <input id="name" name="name" type="text" placeholder="山田 太郎" required>
+        </div>
+        <div>
+          <label for="email">メールアドレス</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+      </div>
       <div>
-        <p><strong id="ownerName">店主</strong></p>
-        <p id="ownerIntro">バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。</p>
+        <label for="message">お問い合わせ内容</label>
+        <textarea id="message" name="message" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+      </div>
+      <div>
+        <button class="btn" type="submit">メールを作成して送る</button>
+      </div>
+      <p class="note">※ 送信ボタンを押すと、お使いのメールアプリが起動し、宛先と本文が自動入力されます（サーバー不要の <code>mailto:</code> 方式）。</p>
+    </form>
+  </section>
+
+  <!-- 基本情報まとめ（新設・最下段） -->
+  <section class="card" aria-labelledby="summary">
+    <h2 id="summary">このカフェの基本情報（まとめ）</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>店名：</strong><span id="sumName"></span></div>
+      <div class="info-item"><strong>電話：</strong><a id="sumTel" href="#"></a></div>
+      <div class="info-item"><strong>住所：</strong><span id="sumAddr"></span></div>
+      <div class="info-item"><strong>最寄り：</strong><span id="sumNearest"></span></div>
+      <div class="info-item"><strong>駐車場：</strong><span id="sumParking"></span></div>
+      <div class="info-item"><strong>営業時間（要約）：</strong><span id="sumHours"></span></div>
+      <div class="info-item"><strong>SNS：</strong>
+        <a id="sumInsta" href="#" target="_blank" rel="noopener">Instagram</a> ／
+        <a id="sumX" href="#" target="_blank" rel="noopener">X</a>
+      </div>
+      <div class="info-item">
+        <a class="btn" id="sumMap" href="#" target="_blank" rel="noopener">Googleマップを開く</a>
       </div>
     </div>
   </section>
 
-  <!-- ギャラリー（最下部に復活） -->
-  <section class="grid three" aria-labelledby="gallery">
-    <div class="card"><img class="img-fit" id="g1" alt="ラテの写真"></div>
-    <div class="card"><img class="img-fit" id="g2" alt="コーヒー豆の写真"></div>
-    <div class="card"><img class="img-fit" id="g3" alt="店内の写真"></div>
-  </section>
-
 </main>
 
-<footer style="padding:28px 18px 48px;text-align:center;color:#8a8a8a">
+<footer>
   <div>© <span id="year"></span> <span id="footerName">（店名）</span></div>
-  <div style="margin-top:6px">写真：Unsplash（商用利用可・クレジット不要）</div>
-  <div style="margin-top:8px">
-    <a id="insta" href="#" target="_blank" rel="noopener">Instagram</a> ／
-    <a id="xlink" href="#" target="_blank" rel="noopener">X / Twitter</a>
-  </div>
 </footer>
 
 <script>
@@ -247,14 +272,10 @@
     el.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3 style="margin:10px 0 6px">${f.title}</h3><p>${f.text}</p>`;
     featureCards.appendChild(el);
   });
-
-  // 右：コラージュ（※ 三杯の写真は使わない）
-  phA.src = DATA.images.collage1;
-  phB.src = DATA.images.collage2;
-  phC.src = DATA.images.collage3;
+  phA.src=DATA.images.collage1; phB.src=DATA.images.collage2; phC.src=DATA.images.collage3;
 
   // メニュー
-  DATA.menu.forEach(m=>{
+  DATA.menu?.forEach?.(m=>{
     const li=document.createElement('li');
     li.style.margin="6px 0";
     li.innerHTML=`<strong>${m.name}</strong> …… ${m.price}`+(m.note?` <span style="color:#8a6b52">（${m.note}）</span>`:"");
@@ -280,16 +301,39 @@
   ownerName.textContent=DATA.owner.name;
   ownerIntro.textContent=DATA.owner.intro;
 
-  // ギャラリー
-  g1.src=DATA.images.latte;
-  g2.src=DATA.images.beans;
-  g3.src=DATA.images.interior;
+  // お問い合わせ（mailto 方式）
+  contactForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name=nameInput.value||name.value; // 互換
+    const mail=email.value;
+    const msg=message.value;
+    const subject=encodeURIComponent(`【お問い合わせ】${DATA.name} / ${name}`);
+    const body=encodeURIComponent(`お名前: ${name}\nメール: ${mail}\n\n本文:\n${msg}\n\n---\n自動作成: ${location.href}`);
+    const href=`mailto:${DATA.email}?subject=${subject}&body=${body}`;
+    window.location.href=href;
+  });
 
-  // フッター
-  year.textContent=new Date().getFullYear();
+  // まとめ
   footerName.textContent=DATA.name;
-  insta.href=DATA.sns.instagram||"#";
-  xlink.href=DATA.sns.x||"#";
+  year.textContent=new Date().getFullYear();
+  sumName.textContent=DATA.name;
+  sumTel.href=telHref; sumTel.textContent=DATA.phone;
+  sumAddr.textContent=DATA.address;
+  sumNearest.textContent=DATA.nearest;
+  sumParking.textContent=DATA.parking;
+  // 営業時間要約（定休日＋代表時間）
+  const open = DATA.openHours.filter(x=>x.h!=="定休日");
+  const weekday = open.find(x=>/月/.test(x.d))?.h || "";
+  const weekend = DATA.openHours.find(x=>/土/.test(x.d))?.h || "";
+  const holiday = DATA.openHours.find(x=>/日|祝/.test(x.d))?.h || "";
+  const closed = DATA.openHours.find(x=>x.h==="定休日")?.d || "";
+  sumHours.textContent = `平日 ${weekday} ／ 土 ${weekend} ／ 日・祝 ${holiday}` + (closed?`（${closed} 定休）`:"");
+  sumInsta.href=DATA.sns.instagram||"#";
+  sumX.href=DATA.sns.x||"#";
+  sumMap.href=mapHref;
+
+  // フォーム要素参照（上で使うために最後で取得）
+  const nameInput=document.getElementById('name');
 </script>
 </body>
 </html>
