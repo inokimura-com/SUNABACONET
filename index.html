@@ -53,11 +53,21 @@
     .feature-cards{display:grid;gap:18px}
     .feature-card{padding:18px;border-radius:16px;box-shadow:var(--shadow);background:#fff}
     .feature-card .img{width:100%;height:170px;object-fit:cover;border-radius:12px}
-    .about-photo .img{width:100%;height:280px;object-fit:cover;border-radius:12px}
+
+    /* 右側は写真コラージュ（3枚） */
+    .about-photo .photo-grid{display:grid;gap:12px;grid-template-areas:
+      "A A B"
+      "A A C";}
+    .about-photo .phA{grid-area:A}
+    .about-photo .phB{grid-area:B}
+    .about-photo .phC{grid-area:C}
+    .about-photo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+    .about-photo{display:block}
+
     @media (min-width:1024px){
       .about-grid{grid-template-columns:1.2fr 1fr;align-items:start}
       .feature-cards{grid-template-columns:repeat(3,1fr)}
-      .about-photo .img{height:320px}
+      .feature-card .img{height:170px}
     }
 
     /* Tables */
@@ -66,11 +76,9 @@
     tr:nth-child(even){background:#faf6f1}
     th{background:#efe2d3;white-space:nowrap}
 
-    /* Images */
+    /* Gallery */
     .img-fit{width:100%;height:220px;object-fit:cover;border-radius:12px}
     .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
-
-    footer{padding:28px 18px 48px;text-align:center;color:#8a8a8a}
   </style>
 </head>
 <body>
@@ -93,16 +101,33 @@
     ],
     heroImg:"https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
     images:{
-      latte:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
-      beans:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop",
-      interior:"https://images.unsplash.com/photo-1453614512568-c4024d13c247?q=80&w=1200&auto=format&fit=crop",
-      owner:"https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=600&auto=format&fit=crop"
+      latte:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop",   /* 新：ラテアート上面 */
+      beans:"https://images.unsplash.com/photo-1461988091159-192b6df7054f?q=80&w=1200&auto=format&fit=crop",  /* 新：焙煎豆 */
+      interior:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop", /* 新：店内 */
+      owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",     /* 店主イメージ */
+      collage1:"https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1200&auto=format&fit=crop", /* ドリップ */
+      collage2:"https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=800&auto=format&fit=crop",  /* カップ */
+      collage3:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=800&auto=format&fit=crop"   /* 焙煎機/豆 */
     },
     features:[
       {title:"ミルクたっぷりカフェオレ",text:"甘さ控えめでも満足感。濃いめのエスプレッソにスチームミルクをたっぷり。",img:"latte"},
       {title:"こだわりの豆",text:"中深煎り中心、季節のシングルも入替。ハンドドリップで丁寧に抽出。",img:"beans"},
       {title:"くつろぎ空間",text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。",img:"interior"}
-    ]
+    ],
+    menu:[
+      {name:"カフェオレ（ホット）",price:"¥520",note:"ミルク多めが人気"},
+      {name:"カフェオレ（アイス）",price:"¥540",note:"夏季おすすめ"},
+      {name:"ハウスブレンド（ドリップ）",price:"¥480",note:"香りと甘みのバランス"},
+      {name:"シングルオリジン（季節）",price:"¥520",note:"産地表示・数量限定"},
+      {name:"自家製チーズケーキ",price:"¥420",note:"数量限定"}
+    ],
+    news:[
+      "季節限定：ハニーラテ販売中",
+      "豆の量り売り 100g〜（ブレンド／シングル）",
+      "臨時休業：水曜（焙煎日のため）"
+    ],
+    owner:{ name:"店主 山田", intro:"バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。" },
+    sns:{ instagram:"https://instagram.com/cafe_oreore", x:"https://x.com/cafe_oreore" }
   };
 </script>
 
@@ -135,14 +160,20 @@
     </div>
     <div class="about-grid">
       <div class="feature-cards" id="featureCards"></div>
+
+      <!-- 右：コラージュ（3枚）。※「三杯の写真」は使用していません -->
       <div class="about-photo">
-        <img class="img" id="featureMainImg" src="" alt="カフェオレのイメージ">
+        <div class="photo-grid">
+          <img class="phA" id="phA" alt="ドリップの写真">
+          <img class="phB" id="phB" alt="カップの写真">
+          <img class="phC" id="phC" alt="焙煎・豆の写真">
+        </div>
         <p style="margin-top:10px;">写真はイメージ（Unsplash の無料写真）</p>
       </div>
     </div>
   </section>
 
-  <!-- メニュー＋アクセス（例：2カラム） -->
+  <!-- メニュー＋アクセス -->
   <section class="grid two" aria-labelledby="menu">
     <div class="card">
       <h2 id="menu">メニュー抜粋</h2>
@@ -166,19 +197,34 @@
     </div>
   </section>
 
-  <!-- 店主紹介 -->
+  <!-- 店主紹介（復活） -->
   <section class="card" aria-labelledby="owner">
     <h2 id="owner">店主紹介</h2>
     <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
       <img id="ownerImg" class="avatar" src="" alt="店主の写真（フリー素材）">
-      <div><p><strong id="ownerName">店主</strong></p><p id="ownerIntro">バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。</p></div>
+      <div>
+        <p><strong id="ownerName">店主</strong></p>
+        <p id="ownerIntro">バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。</p>
+      </div>
     </div>
+  </section>
+
+  <!-- ギャラリー（最下部に復活） -->
+  <section class="grid three" aria-labelledby="gallery">
+    <div class="card"><img class="img-fit" id="g1" alt="ラテの写真"></div>
+    <div class="card"><img class="img-fit" id="g2" alt="コーヒー豆の写真"></div>
+    <div class="card"><img class="img-fit" id="g3" alt="店内の写真"></div>
   </section>
 
 </main>
 
-<footer>
-  <div>© <span id="year"></span> カフェ オレオレ</div>
+<footer style="padding:28px 18px 48px;text-align:center;color:#8a8a8a">
+  <div>© <span id="year"></span> <span id="footerName">（店名）</span></div>
+  <div style="margin-top:6px">写真：Unsplash（商用利用可・クレジット不要）</div>
+  <div style="margin-top:8px">
+    <a id="insta" href="#" target="_blank" rel="noopener">Instagram</a> ／
+    <a id="xlink" href="#" target="_blank" rel="noopener">X / Twitter</a>
+  </div>
 </footer>
 
 <script>
@@ -193,7 +239,7 @@
   const mapHref="https://www.google.com/maps/search/?api=1&query="+enc(DATA.address);
   telTop.href=telHref; telBtn.href=telHref; mapTop.href=mapHref; mapBtn.href=mapHref;
 
-  // こだわりカード生成
+  // こだわりカード
   DATA.features.forEach(f=>{
     const el=document.createElement('div');
     el.className='feature-card';
@@ -201,10 +247,14 @@
     el.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3 style="margin:10px 0 6px">${f.title}</h3><p>${f.text}</p>`;
     featureCards.appendChild(el);
   });
-  featureMainImg.src=DATA.images.latte;
+
+  // 右：コラージュ（※ 三杯の写真は使わない）
+  phA.src = DATA.images.collage1;
+  phB.src = DATA.images.collage2;
+  phC.src = DATA.images.collage3;
 
   // メニュー
-  DATA.menu?.forEach?.(m=>{
+  DATA.menu.forEach(m=>{
     const li=document.createElement('li');
     li.style.margin="6px 0";
     li.innerHTML=`<strong>${m.name}</strong> …… ${m.price}`+(m.note?` <span style="color:#8a6b52">（${m.note}）</span>`:"");
@@ -227,10 +277,19 @@
 
   // 店主
   ownerImg.src=DATA.images.owner;
-  ownerName.textContent=DATA.owner?.name||"店主";
-  ownerIntro.textContent=DATA.owner?.intro||"";
+  ownerName.textContent=DATA.owner.name;
+  ownerIntro.textContent=DATA.owner.intro;
 
+  // ギャラリー
+  g1.src=DATA.images.latte;
+  g2.src=DATA.images.beans;
+  g3.src=DATA.images.interior;
+
+  // フッター
   year.textContent=new Date().getFullYear();
+  footerName.textContent=DATA.name;
+  insta.href=DATA.sns.instagram||"#";
+  xlink.href=DATA.sns.x||"#";
 </script>
 </body>
 </html>
