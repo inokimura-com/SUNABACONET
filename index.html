@@ -9,80 +9,75 @@
   <style>
     :root{
       --bg:#fff8f2; --card:#ffffff; --ink:#2c2c2c; --mute:#6b6b6b;
-      --accent:#8b5e34; --radius:18px;
-      --shadow:0 10px 25px rgba(0,0,0,.08);
+      --accent:#8b5e34; --radius:18px; --shadow:0 10px 25px rgba(0,0,0,.08);
     }
     *{box-sizing:border-box}
     html,body{margin:0}
-    body{
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP",sans-serif;
-      color:var(--ink); background:var(--bg); line-height:1.7;
-    }
-    a{color:var(--accent); text-decoration:none}
-    img{max-width:100%; display:block}
+    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
 
     /* Header */
-    header{position:sticky; top:0; z-index:10; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.05)}
-    .bar{max-width:1100px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; justify-content:space-between}
-    .brand{display:flex; align-items:center; gap:10px}
-    .logo{width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,#e8d7c6,#fff); border:1px solid #e5d7c7}
+    header{position:sticky;top:0;z-index:10;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .bar{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#e8d7c6,#fff);border:1px solid #e5d7c7}
     .title{font-weight:800}
-    .nav{display:flex; gap:8px}
-    .btn{display:inline-flex; align-items:center; background:var(--accent); color:#fff; padding:10px 14px; border-radius:12px; font-weight:700; box-shadow:var(--shadow)}
-    .btn.secondary{background:#f1e5d9; color:#5a3e26}
+    .nav{display:flex;gap:8px}
+    .btn{display:inline-flex;align-items:center;background:var(--accent);color:#fff;padding:10px 14px;border-radius:12px;font-weight:700;box-shadow:var(--shadow)}
+    .btn.secondary{background:#f1e5d9;color:#5a3e26}
 
     /* Hero */
-    .hero{position:relative; min-height:50vh; display:grid; place-items:center; text-align:center; color:white;
-      background:url('') center/cover no-repeat;}
-    .hero::after{content:""; position:absolute; inset:0; background:rgba(0,0,0,.45);}
-    .hero-inner{position:relative; padding:56px 20px; max-width:960px; z-index:1}
-    .hero h1{margin:0 0 10px; font-size: clamp(28px, 6vw, 48px);}
-    .hero p{margin:0 auto; max-width:740px; opacity:.95}
-    .cta-row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px}
-    .badge{display:inline-block; padding:6px 12px; border-radius:999px; background:#ffffffd1; color:#3a2a1e; margin-bottom:14px}
+    .hero{position:relative;min-height:50vh;display:grid;place-items:center;text-align:center;color:#fff;background:url('') center/cover no-repeat}
+    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
+    .hero-inner{position:relative;padding:56px 20px;max-width:960px;z-index:1}
+    .badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#ffffffd1;color:#3a2a1e;margin-bottom:14px}
+    .hero h1{margin:0 0 10px;font-size:clamp(28px,6vw,48px)}
+    .hero p{margin:0 auto;max-width:740px;opacity:.95}
+    .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 
     /* Common layout */
-    .wrap{max-width:1100px; margin:32px auto; padding:0 20px}
-    .grid{display:grid; gap:24px}
+    .wrap{max-width:1100px;margin:32px auto;padding:0 20px}
+    .grid{display:grid;gap:24px}
     .two{grid-template-columns:1fr}
     .three{grid-template-columns:1fr}
-    @media(min-width:780px){.two{grid-template-columns:1fr 1fr} .three{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px}
-    h2{font-size: clamp(22px, 3.5vw, 28px); margin:6px 0 16px}
+    @media (min-width:780px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+    h2{font-size:clamp(22px,3.5vw,28px);margin:6px 0 16px}
     .lead{color:var(--mute)}
 
-    /* 当店のこだわり（フル幅） */
-    .section-wide{margin:32px 0; padding:0 4vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);}
-    .section-wide .inner{max-width:1400px; margin:0 auto;}
-    .about-head{margin:0 auto 16px; max-width:1100px; padding:0 8px;}
-    .about-grid{display:grid; gap:20px;}
-    .feature-cards{display:grid; gap:18px;}
-    .feature-card .img{width:100%; height:180px; object-fit:cover; border-radius:12px;}
-    .about-photo .img{width:100%; height:260px; object-fit:cover; border-radius:12px;}
-    @media(min-width:1024px){
-      .about-grid{grid-template-columns:1.2fr 1fr; align-items:start;}
-      .feature-cards{grid-template-columns:repeat(3,1fr);}
-      .feature-card .img{height:170px;}
-      .about-photo .img{height:300px;}
+    /* === 当店のこだわり：横幅めいっぱい1枚カード === */
+    .about-card{padding:26px}
+    .about-top{margin-bottom:16px}
+    .about-grid{display:grid;gap:20px}
+    .feature-cards{display:grid;gap:18px}
+    .feature-card{padding:18px;border-radius:16px;box-shadow:var(--shadow);background:#fff}
+    .feature-card .img{width:100%;height:170px;object-fit:cover;border-radius:12px}
+    .about-photo .img{width:100%;height:280px;object-fit:cover;border-radius:12px}
+    @media (min-width:1024px){
+      .about-grid{grid-template-columns:1.2fr 1fr;align-items:start}
+      .feature-cards{grid-template-columns:repeat(3,1fr)}
+      .about-photo .img{height:320px}
     }
 
     /* Tables */
-    table{width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden}
-    th,td{padding:10px 12px; text-align:left}
+    table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+    th,td{padding:10px 12px;text-align:left}
     tr:nth-child(even){background:#faf6f1}
-    th{background:#efe2d3; white-space:nowrap}
+    th{background:#efe2d3;white-space:nowrap}
 
     /* Images */
-    .img-fit{width:100%; height:220px; object-fit:cover; border-radius:12px}
-    .avatar{width:88px; height:88px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:var(--shadow)}
+    .img-fit{width:100%;height:220px;object-fit:cover;border-radius:12px}
+    .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
 
-    footer{padding:28px 18px 48px; text-align:center; color:#8a8a8a}
+    footer{padding:28px 18px 48px;text-align:center;color:#8a8a8a}
   </style>
 </head>
 <body>
 
+<!-- ====== ダミーデータ（必要に応じて変更） ====== -->
 <script>
-  const DATA={
+  const DATA = {
     name:"カフェ オレオレ",
     catch:"ミルクたっぷりカフェオレと、こだわりの豆",
     sub:"濃いめのエスプレッソ×たっぷりミルク。深いのに軽い一杯をどうぞ。",
@@ -91,7 +86,11 @@
     parking:"あり（2台）",
     phone:"092-123-4567",
     email:"hello@oreore-cafe.example",
-    openHours:[{d:"月",h:"10:00–18:00"},{d:"火",h:"10:00–18:00"},{d:"水",h:"定休日"},{d:"木",h:"10:00–18:00"},{d:"金",h:"10:00–18:00"},{d:"土",h:"10:00–19:00"},{d:"日・祝",h:"10:00–19:00"}],
+    openHours:[
+      {d:"月",h:"10:00–18:00"},{d:"火",h:"10:00–18:00"},{d:"水",h:"定休日"},
+      {d:"木",h:"10:00–18:00"},{d:"金",h:"10:00–18:00"},
+      {d:"土",h:"10:00–19:00"},{d:"日・祝",h:"10:00–19:00"}
+    ],
     heroImg:"https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
     images:{
       latte:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
@@ -109,11 +108,8 @@
 
 <header>
   <div class="bar">
-    <div class="brand">
-      <div class="logo"></div>
-      <div class="title" id="brandTitle">Cafe</div>
-    </div>
-    <nav class="nav"><a class="btn secondary" id="telTop" href="#">TEL</a><a class="btn" id="mapTop" href="#">MAP</a></nav>
+    <div class="brand"><div class="logo"></div><div class="title" id="brandTitle">Cafe</div></div>
+    <nav class="nav"><a class="btn secondary" id="telTop" href="#">TEL</a><a class="btn" id="mapTop" href="#" target="_blank" rel="noopener">MAP</a></nav>
   </div>
 </header>
 
@@ -122,26 +118,60 @@
     <span class="badge">Milk-rich Café au Lait</span>
     <h1 id="h1"></h1>
     <p id="sub"></p>
-    <div class="cta-row"><a class="btn" id="mapBtn" href="#">Googleマップを開く</a><a class="btn secondary" id="telBtn" href="#">電話する</a></div>
+    <div class="cta-row">
+      <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">Googleマップを開く</a>
+      <a class="btn secondary" id="telBtn" href="#">電話する</a>
+    </div>
   </div>
 </section>
 
 <main class="wrap">
 
-  <!-- 当店のこだわり -->
-  <section class="section-wide" aria-labelledby="about">
-    <div class="inner">
-      <div class="about-head">
-        <h2 id="about">当店のこだわり</h2>
-        <p class="lead">“ミルクたっぷり”が主役。エスプレッソのキレを活かしつつ、濃厚なのに軽やかな後味に仕上げています。</p>
+  <!-- === 当店のこだわり（横幅めいっぱいの1枚カード） === -->
+  <section class="card about-card" aria-labelledby="about">
+    <div class="about-top">
+      <h2 id="about">当店のこだわり</h2>
+      <p class="lead">“ミルクたっぷり”が主役。エスプレッソのキレを活かしつつ、濃厚なのに軽やかな後味に仕上げています。</p>
+    </div>
+    <div class="about-grid">
+      <div class="feature-cards" id="featureCards"></div>
+      <div class="about-photo">
+        <img class="img" id="featureMainImg" src="" alt="カフェオレのイメージ">
+        <p style="margin-top:10px;">写真はイメージ（Unsplash の無料写真）</p>
       </div>
-      <div class="about-grid">
-        <div class="feature-cards" id="featureCards"></div>
-        <div class="card about-photo">
-          <img class="img" id="featureMainImg" src="" alt="カフェオレのイメージ">
-          <p style="margin-top:10px;">写真はイメージ（Unsplash）</p>
-        </div>
-      </div>
+    </div>
+  </section>
+
+  <!-- メニュー＋アクセス（例：2カラム） -->
+  <section class="grid two" aria-labelledby="menu">
+    <div class="card">
+      <h2 id="menu">メニュー抜粋</h2>
+      <ul id="menuList"></ul>
+    </div>
+    <div class="card" id="access" aria-labelledby="accessTitle">
+      <h2 id="accessTitle">営業時間・アクセス</h2>
+      <table id="hoursTable"></table>
+      <p id="addrLine"></p><p id="nearestLine"></p><p id="parkingLine"></p>
+      <p>電話：<a id="telLink" href="#"></a></p>
+      <p>メール：<a id="mailLink" href="#"></a></p>
+      <p style="margin-top:10px;"><a class="btn" id="mapBtn2" href="#" target="_blank" rel="noopener">Googleマップを開く</a></p>
+    </div>
+  </section>
+
+  <!-- 地図 -->
+  <section class="card" aria-labelledby="map">
+    <h2 id="map">地図</h2>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:var(--shadow)">
+      <iframe id="mapFrame" title="Google Map" width="100%" height="340" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- 店主紹介 -->
+  <section class="card" aria-labelledby="owner">
+    <h2 id="owner">店主紹介</h2>
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <img id="ownerImg" class="avatar" src="" alt="店主の写真（フリー素材）">
+      <div><p><strong id="ownerName">店主</strong></p><p id="ownerIntro">バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。</p></div>
     </div>
   </section>
 
@@ -152,23 +182,55 @@
 </footer>
 
 <script>
-  document.getElementById('brandTitle').textContent=DATA.name;
-  document.getElementById('h1').textContent=DATA.catch;
-  document.getElementById('sub').textContent=DATA.sub;
-  document.getElementById('hero').style.backgroundImage=`url('${DATA.heroImg}')`;
+  const enc=s=>encodeURIComponent(s);
 
-  // Features
-  const wrap=document.getElementById('featureCards');
+  // ヘッダー/ヒーロー
+  brandTitle.textContent=DATA.name;
+  h1.textContent=DATA.catch;
+  sub.textContent=DATA.sub;
+  hero.style.backgroundImage=`url('${DATA.heroImg}')`;
+  const telHref="tel:"+DATA.phone.replace(/[^0-9+]/g,'');
+  const mapHref="https://www.google.com/maps/search/?api=1&query="+enc(DATA.address);
+  telTop.href=telHref; telBtn.href=telHref; mapTop.href=mapHref; mapBtn.href=mapHref;
+
+  // こだわりカード生成
   DATA.features.forEach(f=>{
-    const card=document.createElement('div');
-    card.className='card feature-card';
-    const url=DATA.images[f.img];
-    card.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3>${f.title}</h3><p>${f.text}</p>`;
-    wrap.appendChild(card);
+    const el=document.createElement('div');
+    el.className='feature-card';
+    const url=DATA.images[f.img]||DATA.images.latte;
+    el.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3 style="margin:10px 0 6px">${f.title}</h3><p>${f.text}</p>`;
+    featureCards.appendChild(el);
   });
-  document.getElementById('featureMainImg').src=DATA.images.latte;
+  featureMainImg.src=DATA.images.latte;
 
-  document.getElementById('year').textContent=new Date().getFullYear();
+  // メニュー
+  DATA.menu?.forEach?.(m=>{
+    const li=document.createElement('li');
+    li.style.margin="6px 0";
+    li.innerHTML=`<strong>${m.name}</strong> …… ${m.price}`+(m.note?` <span style="color:#8a6b52">（${m.note}）</span>`:"");
+    menuList.appendChild(li);
+  });
+
+  // 営業時間/基本情報
+  DATA.openHours.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<th>${r.d}</th><td>${r.h}</td>`;
+    hoursTable.appendChild(tr);
+  });
+  addrLine.textContent=`住所：${DATA.address}`;
+  nearestLine.textContent=`最寄り：${DATA.nearest}`;
+  parkingLine.textContent=`駐車場：${DATA.parking}`;
+  telLink.href=telHref; telLink.textContent=DATA.phone;
+  mailLink.href="mailto:"+DATA.email; mailLink.textContent=DATA.email;
+  mapBtn2.href=mapHref;
+  mapFrame.src="https://www.google.com/maps?q="+enc(DATA.address)+"&output=embed";
+
+  // 店主
+  ownerImg.src=DATA.images.owner;
+  ownerName.textContent=DATA.owner?.name||"店主";
+  ownerIntro.textContent=DATA.owner?.intro||"";
+
+  year.textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
