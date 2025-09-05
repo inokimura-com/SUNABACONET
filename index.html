@@ -5,12 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>カフェ オレオレ｜ミルクたっぷりカフェオレとこだわりの豆</title>
   <meta name="description" content="ミルクたっぷりのカフェオレと、こだわりの豆が自慢のカフェ。営業時間・アクセス・メニュー・お問い合わせはこちら。">
-
   <style>
-    :root{
-      --bg:#fff8f2; --card:#ffffff; --ink:#2c2c2c; --mute:#6b6b6b;
-      --accent:#8b5e34; --radius:18px; --shadow:0 10px 25px rgba(0,0,0,.08);
-    }
+    :root{ --bg:#fff8f2; --card:#ffffff; --ink:#2c2c2c; --mute:#6b6b6b; --accent:#8b5e34; --radius:18px; --shadow:0 10px 25px rgba(0,0,0,.08); }
     *{box-sizing:border-box}
     html,body{margin:0}
     body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7}
@@ -46,15 +42,13 @@
     h2{font-size:clamp(22px,3.5vw,28px);margin:6px 0 16px}
     .lead{color:var(--mute)}
 
-    /* 当店のこだわり（横幅めいっぱいカード） */
+    /* 当店のこだわり（横幅めいっぱいカード／右の写真群なし） */
     .about-card{padding:26px}
     .about-top{margin-bottom:16px}
     .feature-cards{display:grid;gap:18px}
     .feature-card{padding:18px;border-radius:16px;box-shadow:var(--shadow);background:#fff}
     .feature-card .img{width:100%;height:170px;object-fit:cover;border-radius:12px}
-    @media (min-width:1024px){
-      .feature-cards{grid-template-columns:repeat(3,1fr)}
-    }
+    @media (min-width:1024px){ .feature-cards{grid-template-columns:repeat(3,1fr)} }
 
     /* Tables */
     table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
@@ -70,7 +64,7 @@
     textarea{min-height:140px;resize:vertical}
     .note{color:#8a7c6f;font-size:14px}
 
-    /* 店主写真を小さめに */
+    /* Owner small avatar */
     .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
 
     /* Info summary */
@@ -83,6 +77,7 @@
 </head>
 <body>
 
+<!-- ====== ダミーデータ（必要に応じて変更） ====== -->
 <script>
   const DATA = {
     name:"カフェ オレオレ",
@@ -93,6 +88,11 @@
     parking:"あり（2台）",
     phone:"092-123-4567",
     email:"hello@oreore-cafe.example",
+    openHours:[
+      {d:"月",h:"10:00–18:00"},{d:"火",h:"10:00–18:00"},{d:"水",h:"定休日"},
+      {d:"木",h:"10:00–18:00"},{d:"金",h:"10:00–18:00"},
+      {d:"土",h:"10:00–19:00"},{d:"日・祝",h:"10:00–19:00"}
+    ],
     heroImg:"https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
     images:{
       latte:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop",
@@ -105,14 +105,20 @@
       {title:"こだわりの豆",text:"中深煎り中心、季節のシングルも入替。ハンドドリップで丁寧に抽出。",img:"beans"},
       {title:"くつろぎ空間",text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。",img:"interior"}
     ],
-    owner:{ name:"店主 山田", intro:"バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。" }
+    news:[
+      "季節限定：ハニーラテ販売中",
+      "豆の量り売り 100g〜（ブレンド／シングル）",
+      "臨時休業：水曜（焙煎日のため）"
+    ],
+    owner:{ name:"店主 山田", intro:"バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。" },
+    sns:{ instagram:"https://instagram.com/cafe_oreore", x:"https://x.com/cafe_oreore" }
   };
 </script>
 
 <header>
   <div class="bar">
     <div class="brand"><div class="logo"></div><div class="title" id="brandTitle">Cafe</div></div>
-    <nav class="nav"><a class="btn secondary" id="telTop" href="#">TEL</a><a class="btn" id="mapTop" href="#">MAP</a></nav>
+    <nav class="nav"><a class="btn secondary" id="telTop" href="#">TEL</a><a class="btn" id="mapTop" href="#" target="_blank" rel="noopener">MAP</a></nav>
   </div>
 </header>
 
@@ -122,7 +128,7 @@
     <h1 id="h1"></h1>
     <p id="sub"></p>
     <div class="cta-row">
-      <a class="btn" id="mapBtn" href="#">Googleマップを開く</a>
+      <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">Googleマップを開く</a>
       <a class="btn secondary" id="telBtn" href="#">電話する</a>
     </div>
   </div>
@@ -130,7 +136,7 @@
 
 <main class="wrap">
 
-  <!-- 当店のこだわり（右の3枚削除済み） -->
+  <!-- 当店のこだわり（右の写真群は廃止） -->
   <section class="card about-card" aria-labelledby="about">
     <div class="about-top">
       <h2 id="about">当店のこだわり</h2>
@@ -139,7 +145,31 @@
     <div class="feature-cards" id="featureCards"></div>
   </section>
 
-  <!-- 店主紹介 -->
+  <!-- メニュー＋アクセス -->
+  <section class="grid two" aria-labelledby="menu">
+    <div class="card">
+      <h2 id="menu">メニュー抜粋</h2>
+      <ul id="menuList"></ul>
+    </div>
+    <div class="card" id="access" aria-labelledby="accessTitle">
+      <h2 id="accessTitle">営業時間・アクセス</h2>
+      <table id="hoursTable"></table>
+      <p id="addrLine"></p><p id="nearestLine"></p><p id="parkingLine"></p>
+      <p>電話：<a id="telLink" href="#"></a></p>
+      <p>メール：<a id="mailLink" href="#"></a></p>
+      <p style="margin-top:10px;"><a class="btn" id="mapBtn2" href="#" target="_blank" rel="noopener">Googleマップを開く</a></p>
+    </div>
+  </section>
+
+  <!-- 地図 -->
+  <section class="card" aria-labelledby="map">
+    <h2 id="map">地図</h2>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:var(--shadow)">
+      <iframe id="mapFrame" title="Google Map" width="100%" height="340" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- 店主紹介（小さめアバター） -->
   <section class="card" aria-labelledby="owner">
     <h2 id="owner">店主紹介</h2>
     <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
@@ -148,36 +178,147 @@
     </div>
   </section>
 
+  <!-- お問い合わせ -->
+  <section class="card contact-form" aria-labelledby="contact">
+    <h2 id="contact">お問い合わせ</h2>
+    <p class="lead">ご予約・メニュー・テイクアウトのご相談など、お気軽にどうぞ。</p>
+    <form id="contactForm">
+      <div class="row">
+        <div>
+          <label for="name">お名前</label>
+          <input id="name" name="name" type="text" placeholder="山田 太郎" required>
+        </div>
+        <div>
+          <label for="email">メールアドレス</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+      <div>
+        <label for="message">お問い合わせ内容</label>
+        <textarea id="message" name="message" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+      </div>
+      <div>
+        <button class="btn" type="submit">メールを作成して送る</button>
+      </div>
+      <p class="note">※ 送信ボタンを押すと、お使いのメールアプリが起動し、宛先と本文が自動入力されます（サーバー不要の <code>mailto:</code> 方式）。</p>
+    </form>
+  </section>
+
+  <!-- 基本情報まとめ（最下段） -->
+  <section class="card" aria-labelledby="summary">
+    <h2 id="summary">このカフェの基本情報（まとめ）</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>店名：</strong><span id="sumName"></span></div>
+      <div class="info-item"><strong>電話：</strong><a id="sumTel" href="#"></a></div>
+      <div class="info-item"><strong>住所：</strong><span id="sumAddr"></span></div>
+      <div class="info-item"><strong>最寄り：</strong><span id="sumNearest"></span></div>
+      <div class="info-item"><strong>駐車場：</strong><span id="sumParking"></span></div>
+      <div class="info-item"><strong>営業時間（要約）：</strong><span id="sumHours"></span></div>
+      <div class="info-item"><strong>SNS：</strong>
+        <a id="sumInsta" href="#" target="_blank" rel="noopener">Instagram</a> ／
+        <a id="sumX" href="#" target="_blank" rel="noopener">X</a>
+      </div>
+      <div class="info-item">
+        <a class="btn" id="sumMap" href="#" target="_blank" rel="noopener">Googleマップを開く</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  <div>© <span id="year"></span> <span id="footerName"></span></div>
+  <div>© <span id="year"></span> <span id="footerName">（店名）</span></div>
 </footer>
 
 <script>
-  const enc=s=>encodeURIComponent(s);
-  brandTitle.textContent=DATA.name;
-  h1.textContent=DATA.catch;
-  sub.textContent=DATA.sub;
-  hero.style.backgroundImage=`url('${DATA.heroImg}')`;
+  const enc = s => encodeURIComponent(s);
 
-  // Features
+  /* Header / Hero */
+  document.getElementById('brandTitle').textContent = DATA.name;
+  document.getElementById('h1').textContent = DATA.catch;
+  document.getElementById('sub').textContent = DATA.sub;
+  document.getElementById('hero').style.backgroundImage = `url('${DATA.heroImg}')`;
+  const telHref = "tel:" + DATA.phone.replace(/[^0-9+]/g,'');
+  const mapHref = "https://www.google.com/maps/search/?api=1&query=" + enc(DATA.address);
+  document.getElementById('telTop').href = telHref;
+  document.getElementById('mapTop').href = mapHref;
+  document.getElementById('telBtn').href = telHref;
+  document.getElementById('mapBtn').href = mapHref;
+
+  /* Features (about) */
+  const featureWrap = document.getElementById('featureCards');
   DATA.features.forEach(f=>{
-    const el=document.createElement('div');
-    el.className='feature-card';
-    const url=DATA.images[f.img];
-    el.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3>${f.title}</h3><p>${f.text}</p>`;
-    featureCards.appendChild(el);
+    const el = document.createElement('div');
+    el.className = 'feature-card';
+    const url = DATA.images[f.img] || DATA.images.latte;
+    el.innerHTML = `<img class="img" src="${url}" alt="${f.title}"><h3 style="margin:10px 0 6px">${f.title}</h3><p>${f.text}</p>`;
+    featureWrap.appendChild(el);
   });
 
-  // 店主
-  ownerImg.src=DATA.images.owner;
-  ownerName.textContent=DATA.owner.name;
-  ownerIntro.textContent=DATA.owner.intro;
+  /* Menu */
+  const menuUl = document.getElementById('menuList');
+  if (menuUl && Array.isArray(DATA.menu)) {
+    DATA.menu.forEach(m=>{
+      const li = document.createElement('li');
+      li.style.margin = "6px 0";
+      li.innerHTML = `<strong>${m.name}</strong> …… ${m.price}` + (m.note ? ` <span style="color:#8a6b52">（${m.note}）</span>` : "");
+      menuUl.appendChild(li);
+    });
+  }
 
-  // Footer
-  footerName.textContent=DATA.name;
-  year.textContent=new Date().getFullYear();
+  /* Access */
+  const tbl = document.getElementById('hoursTable');
+  DATA.openHours.forEach(r=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<th>${r.d}</th><td>${r.h}</td>`;
+    tbl.appendChild(tr);
+  });
+  document.getElementById('addrLine').textContent = `住所：${DATA.address}`;
+  document.getElementById('nearestLine').textContent = `最寄り：${DATA.nearest}`;
+  document.getElementById('parkingLine').textContent = `駐車場：${DATA.parking}`;
+  const telLink = document.getElementById('telLink'); telLink.href = telHref; telLink.textContent = DATA.phone;
+  const mailLink = document.getElementById('mailLink'); mailLink.href = "mailto:"+DATA.email; mailLink.textContent = DATA.email;
+  document.getElementById('mapBtn2').href = mapHref;
+
+  /* Map */
+  document.getElementById('mapFrame').src = "https://www.google.com/maps?q=" + enc(DATA.address) + "&output=embed";
+
+  /* Owner */
+  document.getElementById('ownerImg').src = DATA.images.owner;
+  document.getElementById('ownerName').textContent = DATA.owner.name;
+  document.getElementById('ownerIntro').textContent = DATA.owner.intro;
+
+  /* Contact (mailto) */
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const emailVal = document.getElementById('email').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    const subject = encodeURIComponent(`【お問い合わせ】${DATA.name} / ${name}`);
+    const body = encodeURIComponent(`お名前: ${name}\nメール: ${emailVal}\n\n本文:\n${msg}\n\n---\n自動作成: ${location.href}`);
+    const href = `mailto:${DATA.email}?subject=${subject}&body=${body}`;
+    window.location.href = href;
+  });
+
+  /* Summary */
+  document.getElementById('footerName').textContent = DATA.name;
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('sumName').textContent = DATA.name;
+  const sumTel = document.getElementById('sumTel'); sumTel.href = telHref; sumTel.textContent = DATA.phone;
+  document.getElementById('sumAddr').textContent = DATA.address;
+  document.getElementById('sumNearest').textContent = DATA.nearest;
+  document.getElementById('sumParking').textContent = DATA.parking;
+
+  const weekday = DATA.openHours.find(x=>x.d.includes("月") && x.h!=="定休日")?.h || "";
+  const sat = DATA.openHours.find(x=>x.d.includes("土"))?.h || "";
+  const sun = DATA.openHours.find(x=>x.d.includes("日") || x.d.includes("祝"))?.h || "";
+  const closed = DATA.openHours.find(x=>x.h==="定休日")?.d || "";
+  document.getElementById('sumHours').textContent = `平日 ${weekday} ／ 土 ${sat} ／ 日・祝 ${sun}` + (closed?`（${closed} 定休）`:"");
+
+  document.getElementById('sumInsta').href = DATA.sns.instagram || "#";
+  document.getElementById('sumX').href = DATA.sns.x || "#";
+  document.getElementById('sumMap').href = mapHref;
 </script>
 </body>
 </html>
