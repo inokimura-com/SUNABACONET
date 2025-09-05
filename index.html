@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>カフェ オレオレ｜ミルクたっぷりカフェオレとこだわりの豆</title>
   <meta name="description" content="ミルクたっぷりのカフェオレと、こだわりの豆が自慢のカフェ。営業時間・アクセス・メニュー・お問い合わせはこちら。">
+
   <style>
     :root{
       --bg:#fff8f2; --card:#ffffff; --ink:#2c2c2c; --mute:#6b6b6b;
@@ -45,20 +46,13 @@
     h2{font-size:clamp(22px,3.5vw,28px);margin:6px 0 16px}
     .lead{color:var(--mute)}
 
-    /* 当店のこだわり（横幅めいっぱい1枚カード） */
+    /* 当店のこだわり（横幅めいっぱいカード） */
     .about-card{padding:26px}
     .about-top{margin-bottom:16px}
-    .about-grid{display:grid;gap:20px}
     .feature-cards{display:grid;gap:18px}
     .feature-card{padding:18px;border-radius:16px;box-shadow:var(--shadow);background:#fff}
     .feature-card .img{width:100%;height:170px;object-fit:cover;border-radius:12px}
-    .about-photo .photo-grid{display:grid;gap:12px;grid-template-areas:"A A B" "A A C"}
-    .about-photo .phA{grid-area:A}
-    .about-photo .phB{grid-area:B}
-    .about-photo .phC{grid-area:C}
-    .about-photo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
     @media (min-width:1024px){
-      .about-grid{grid-template-columns:1.2fr 1fr;align-items:start}
       .feature-cards{grid-template-columns:repeat(3,1fr)}
     }
 
@@ -76,6 +70,9 @@
     textarea{min-height:140px;resize:vertical}
     .note{color:#8a7c6f;font-size:14px}
 
+    /* 店主写真を小さめに */
+    .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
+
     /* Info summary */
     .info-grid{display:grid;gap:14px}
     @media(min-width:780px){.info-grid{grid-template-columns:1fr 1fr}}
@@ -86,7 +83,6 @@
 </head>
 <body>
 
-<!-- ====== ダミーデータ ====== -->
 <script>
   const DATA = {
     name:"カフェ オレオレ",
@@ -97,40 +93,26 @@
     parking:"あり（2台）",
     phone:"092-123-4567",
     email:"hello@oreore-cafe.example",
-    openHours:[
-      {d:"月",h:"10:00–18:00"},{d:"火",h:"10:00–18:00"},{d:"水",h:"定休日"},
-      {d:"木",h:"10:00–18:00"},{d:"金",h:"10:00–18:00"},
-      {d:"土",h:"10:00–19:00"},{d:"日・祝",h:"10:00–19:00"}
-    ],
     heroImg:"https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
     images:{
       latte:"https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop",
       beans:"https://images.unsplash.com/photo-1461988091159-192b6df7054f?q=80&w=1200&auto=format&fit=crop",
       interior:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
-      owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",
-      collage1:"https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1200&auto=format&fit=crop",
-      collage2:"https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=800&auto=format&fit=crop",
-      collage3:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=800&auto=format&fit=crop"
+      owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop"
     },
     features:[
       {title:"ミルクたっぷりカフェオレ",text:"甘さ控えめでも満足感。濃いめのエスプレッソにスチームミルクをたっぷり。",img:"latte"},
       {title:"こだわりの豆",text:"中深煎り中心、季節のシングルも入替。ハンドドリップで丁寧に抽出。",img:"beans"},
       {title:"くつろぎ空間",text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。",img:"interior"}
     ],
-    news:[
-      "季節限定：ハニーラテ販売中",
-      "豆の量り売り 100g〜（ブレンド／シングル）",
-      "臨時休業：水曜（焙煎日のため）"
-    ],
-    owner:{ name:"店主 山田", intro:"バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。" },
-    sns:{ instagram:"https://instagram.com/cafe_oreore", x:"https://x.com/cafe_oreore" }
+    owner:{ name:"店主 山田", intro:"バリスタ歴10年。毎朝の焙煎と抽出で“やさしい一杯”をお届けします。" }
   };
 </script>
 
 <header>
   <div class="bar">
     <div class="brand"><div class="logo"></div><div class="title" id="brandTitle">Cafe</div></div>
-    <nav class="nav"><a class="btn secondary" id="telTop" href="#">TEL</a><a class="btn" id="mapTop" href="#" target="_blank" rel="noopener">MAP</a></nav>
+    <nav class="nav"><a class="btn secondary" id="telTop" href="#">TEL</a><a class="btn" id="mapTop" href="#">MAP</a></nav>
   </div>
 </header>
 
@@ -140,7 +122,7 @@
     <h1 id="h1"></h1>
     <p id="sub"></p>
     <div class="cta-row">
-      <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">Googleマップを開く</a>
+      <a class="btn" id="mapBtn" href="#">Googleマップを開く</a>
       <a class="btn secondary" id="telBtn" href="#">電話する</a>
     </div>
   </div>
@@ -148,47 +130,13 @@
 
 <main class="wrap">
 
-  <!-- 当店のこだわり -->
+  <!-- 当店のこだわり（右の3枚削除済み） -->
   <section class="card about-card" aria-labelledby="about">
     <div class="about-top">
       <h2 id="about">当店のこだわり</h2>
       <p class="lead">“ミルクたっぷり”が主役。エスプレッソのキレを活かしつつ、濃厚なのに軽やかな後味に仕上げています。</p>
     </div>
-    <div class="about-grid">
-      <div class="feature-cards" id="featureCards"></div>
-      <div class="about-photo">
-        <div class="photo-grid">
-          <img class="phA" id="phA" alt="ドリップの写真">
-          <img class="phB" id="phB" alt="カップの写真">
-          <img class="phC" id="phC" alt="焙煎・豆の写真">
-        </div>
-        <p style="margin-top:10px;">写真はイメージ（Unsplash の無料写真）</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- メニュー＋アクセス -->
-  <section class="grid two" aria-labelledby="menu">
-    <div class="card">
-      <h2 id="menu">メニュー抜粋</h2>
-      <ul id="menuList"></ul>
-    </div>
-    <div class="card" id="access" aria-labelledby="accessTitle">
-      <h2 id="accessTitle">営業時間・アクセス</h2>
-      <table id="hoursTable"></table>
-      <p id="addrLine"></p><p id="nearestLine"></p><p id="parkingLine"></p>
-      <p>電話：<a id="telLink" href="#"></a></p>
-      <p>メール：<a id="mailLink" href="#"></a></p>
-      <p style="margin-top:10px;"><a class="btn" id="mapBtn2" href="#" target="_blank" rel="noopener">Googleマップを開く</a></p>
-    </div>
-  </section>
-
-  <!-- 地図 -->
-  <section class="card" aria-labelledby="map">
-    <h2 id="map">地図</h2>
-    <div style="border-radius:12px;overflow:hidden;box-shadow:var(--shadow)">
-      <iframe id="mapFrame" title="Google Map" width="100%" height="340" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+    <div class="feature-cards" id="featureCards"></div>
   </section>
 
   <!-- 店主紹介 -->
@@ -200,140 +148,36 @@
     </div>
   </section>
 
-  <!-- お問い合わせ（新設） -->
-  <section class="card contact-form" aria-labelledby="contact">
-    <h2 id="contact">お問い合わせ</h2>
-    <p class="lead">ご予約・メニュー・テイクアウトのご相談など、お気軽にどうぞ。</p>
-    <form id="contactForm">
-      <div class="row">
-        <div>
-          <label for="name">お名前</label>
-          <input id="name" name="name" type="text" placeholder="山田 太郎" required>
-        </div>
-        <div>
-          <label for="email">メールアドレス</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required>
-        </div>
-      </div>
-      <div>
-        <label for="message">お問い合わせ内容</label>
-        <textarea id="message" name="message" placeholder="お問い合わせ内容をご記入ください" required></textarea>
-      </div>
-      <div>
-        <button class="btn" type="submit">メールを作成して送る</button>
-      </div>
-      <p class="note">※ 送信ボタンを押すと、お使いのメールアプリが起動し、宛先と本文が自動入力されます（サーバー不要の <code>mailto:</code> 方式）。</p>
-    </form>
-  </section>
-
-  <!-- 基本情報まとめ（新設・最下段） -->
-  <section class="card" aria-labelledby="summary">
-    <h2 id="summary">このカフェの基本情報（まとめ）</h2>
-    <div class="info-grid">
-      <div class="info-item"><strong>店名：</strong><span id="sumName"></span></div>
-      <div class="info-item"><strong>電話：</strong><a id="sumTel" href="#"></a></div>
-      <div class="info-item"><strong>住所：</strong><span id="sumAddr"></span></div>
-      <div class="info-item"><strong>最寄り：</strong><span id="sumNearest"></span></div>
-      <div class="info-item"><strong>駐車場：</strong><span id="sumParking"></span></div>
-      <div class="info-item"><strong>営業時間（要約）：</strong><span id="sumHours"></span></div>
-      <div class="info-item"><strong>SNS：</strong>
-        <a id="sumInsta" href="#" target="_blank" rel="noopener">Instagram</a> ／
-        <a id="sumX" href="#" target="_blank" rel="noopener">X</a>
-      </div>
-      <div class="info-item">
-        <a class="btn" id="sumMap" href="#" target="_blank" rel="noopener">Googleマップを開く</a>
-      </div>
-    </div>
-  </section>
-
 </main>
 
 <footer>
-  <div>© <span id="year"></span> <span id="footerName">（店名）</span></div>
+  <div>© <span id="year"></span> <span id="footerName"></span></div>
 </footer>
 
 <script>
   const enc=s=>encodeURIComponent(s);
-
-  // ヘッダー/ヒーロー
   brandTitle.textContent=DATA.name;
   h1.textContent=DATA.catch;
   sub.textContent=DATA.sub;
   hero.style.backgroundImage=`url('${DATA.heroImg}')`;
-  const telHref="tel:"+DATA.phone.replace(/[^0-9+]/g,'');
-  const mapHref="https://www.google.com/maps/search/?api=1&query="+enc(DATA.address);
-  telTop.href=telHref; telBtn.href=telHref; mapTop.href=mapHref; mapBtn.href=mapHref;
 
-  // こだわりカード
+  // Features
   DATA.features.forEach(f=>{
     const el=document.createElement('div');
     el.className='feature-card';
-    const url=DATA.images[f.img]||DATA.images.latte;
-    el.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3 style="margin:10px 0 6px">${f.title}</h3><p>${f.text}</p>`;
+    const url=DATA.images[f.img];
+    el.innerHTML=`<img class="img" src="${url}" alt="${f.title}"><h3>${f.title}</h3><p>${f.text}</p>`;
     featureCards.appendChild(el);
   });
-  phA.src=DATA.images.collage1; phB.src=DATA.images.collage2; phC.src=DATA.images.collage3;
-
-  // メニュー
-  DATA.menu?.forEach?.(m=>{
-    const li=document.createElement('li');
-    li.style.margin="6px 0";
-    li.innerHTML=`<strong>${m.name}</strong> …… ${m.price}`+(m.note?` <span style="color:#8a6b52">（${m.note}）</span>`:"");
-    menuList.appendChild(li);
-  });
-
-  // 営業時間/基本情報
-  DATA.openHours.forEach(r=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<th>${r.d}</th><td>${r.h}</td>`;
-    hoursTable.appendChild(tr);
-  });
-  addrLine.textContent=`住所：${DATA.address}`;
-  nearestLine.textContent=`最寄り：${DATA.nearest}`;
-  parkingLine.textContent=`駐車場：${DATA.parking}`;
-  telLink.href=telHref; telLink.textContent=DATA.phone;
-  mailLink.href="mailto:"+DATA.email; mailLink.textContent=DATA.email;
-  mapBtn2.href=mapHref;
-  mapFrame.src="https://www.google.com/maps?q="+enc(DATA.address)+"&output=embed";
 
   // 店主
   ownerImg.src=DATA.images.owner;
   ownerName.textContent=DATA.owner.name;
   ownerIntro.textContent=DATA.owner.intro;
 
-  // お問い合わせ（mailto 方式）
-  contactForm.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const name=nameInput.value||name.value; // 互換
-    const mail=email.value;
-    const msg=message.value;
-    const subject=encodeURIComponent(`【お問い合わせ】${DATA.name} / ${name}`);
-    const body=encodeURIComponent(`お名前: ${name}\nメール: ${mail}\n\n本文:\n${msg}\n\n---\n自動作成: ${location.href}`);
-    const href=`mailto:${DATA.email}?subject=${subject}&body=${body}`;
-    window.location.href=href;
-  });
-
-  // まとめ
+  // Footer
   footerName.textContent=DATA.name;
   year.textContent=new Date().getFullYear();
-  sumName.textContent=DATA.name;
-  sumTel.href=telHref; sumTel.textContent=DATA.phone;
-  sumAddr.textContent=DATA.address;
-  sumNearest.textContent=DATA.nearest;
-  sumParking.textContent=DATA.parking;
-  // 営業時間要約（定休日＋代表時間）
-  const open = DATA.openHours.filter(x=>x.h!=="定休日");
-  const weekday = open.find(x=>/月/.test(x.d))?.h || "";
-  const weekend = DATA.openHours.find(x=>/土/.test(x.d))?.h || "";
-  const holiday = DATA.openHours.find(x=>/日|祝/.test(x.d))?.h || "";
-  const closed = DATA.openHours.find(x=>x.h==="定休日")?.d || "";
-  sumHours.textContent = `平日 ${weekday} ／ 土 ${weekend} ／ 日・祝 ${holiday}` + (closed?`（${closed} 定休）`:"");
-  sumInsta.href=DATA.sns.instagram||"#";
-  sumX.href=DATA.sns.x||"#";
-  sumMap.href=mapHref;
-
-  // フォーム要素参照（上で使うために最後で取得）
-  const nameInput=document.getElementById('name');
 </script>
 </body>
 </html>
