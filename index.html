@@ -32,10 +32,9 @@
     .hero p{margin:0 auto;max-width:740px;opacity:.95}
     .cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 
-    /* Layout（間隔広め） */
-    .wrap{max-width:1100px;margin:36px auto;padding:0 22px}
-    .wrap > section{margin:34px 0;}
-    .grid{display:grid;gap:28px}
+    /* Common layout */
+    .wrap{max-width:1100px;margin:32px auto;padding:0 20px}
+    .grid{display:grid;gap:24px}
     .two{grid-template-columns:1fr}
     .three{grid-template-columns:1fr}
     @media (min-width:780px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}}
@@ -43,7 +42,7 @@
     h2{font-size:clamp(22px,3.5vw,28px);margin:6px 0 16px}
     .lead{color:var(--mute)}
 
-    /* こだわり（右の写真群なし） */
+    /* 当店のこだわり（横幅めいっぱいカード／右の写真群なし） */
     .about-card{padding:26px}
     .about-top{margin-bottom:16px}
     .feature-cards{display:grid;gap:18px}
@@ -65,20 +64,20 @@
     textarea{min-height:140px;resize:vertical}
     .note{color:#8a7c6f;font-size:14px}
 
-    /* Owner avatar（小さめ） */
+    /* Owner small avatar */
     .avatar{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow)}
 
     /* Info summary */
-    .info-grid{display:grid;gap:16px}
+    .info-grid{display:grid;gap:14px}
     @media(min-width:780px){.info-grid{grid-template-columns:1fr 1fr}}
     .info-item{padding:14px;border:1px solid #eee;border-radius:12px;background:#fff}
 
-    footer{padding:32px 18px 56px;text-align:center;color:#8a8a8a}
+    footer{padding:28px 18px 48px;text-align:center;color:#8a8a8a}
   </style>
 </head>
 <body>
 
-<!-- ====== ダミーデータ ====== -->
+<!-- ====== ダミーデータ（必要に応じて変更） ====== -->
 <script>
   const DATA = {
     name:"カフェ オレオレ",
@@ -101,14 +100,10 @@
       interior:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
       owner:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop"
     },
-    /* メニュー6品（ダミー） */
-    menu:[
-      {name:"カフェオレ（ホット）", price:"¥520", note:"ミルク多めが人気"},
-      {name:"カフェオレ（アイス）", price:"¥540", note:"夏季おすすめ"},
-      {name:"ハウスブレンド（ドリップ）", price:"¥480", note:"香りと甘みのバランス"},
-      {name:"エスプレッソ（ダブル）", price:"¥420", note:"力強いコク"},
-      {name:"シングルオリジン（季節）", price:"¥560", note:"産地表示・数量限定"},
-      {name:"自家製チーズケーキ", price:"¥420", note:"数量限定"}
+    features:[
+      {title:"ミルクたっぷりカフェオレ",text:"甘さ控えめでも満足感。濃いめのエスプレッソにスチームミルクをたっぷり。",img:"latte"},
+      {title:"こだわりの豆",text:"中深煎り中心、季節のシングルも入替。ハンドドリップで丁寧に抽出。",img:"beans"},
+      {title:"くつろぎ空間",text:"お一人でも入りやすい落ち着いた店内。テイクアウトもご用意。",img:"interior"}
     ],
     news:[
       "季節限定：ハニーラテ販売中",
@@ -141,7 +136,7 @@
 
 <main class="wrap">
 
-  <!-- 当店のこだわり -->
+  <!-- 当店のこだわり（右の写真群は廃止） -->
   <section class="card about-card" aria-labelledby="about">
     <div class="about-top">
       <h2 id="about">当店のこだわり</h2>
@@ -205,7 +200,7 @@
       <div>
         <button class="btn" type="submit">メールを作成して送る</button>
       </div>
-      <p class="note">※ 送信ボタンを押すと、お使いのメールアプリが起動し、宛先と本文が自動入力されます（<code>mailto:</code> 方式）。</p>
+      <p class="note">※ 送信ボタンを押すと、お使いのメールアプリが起動し、宛先と本文が自動入力されます（サーバー不要の <code>mailto:</code> 方式）。</p>
     </form>
   </section>
 
@@ -238,12 +233,11 @@
 <script>
   const enc = s => encodeURIComponent(s);
 
-  // ヘッダー / ヒーロー
+  /* Header / Hero */
   document.getElementById('brandTitle').textContent = DATA.name;
   document.getElementById('h1').textContent = DATA.catch;
   document.getElementById('sub').textContent = DATA.sub;
   document.getElementById('hero').style.backgroundImage = `url('${DATA.heroImg}')`;
-
   const telHref = "tel:" + DATA.phone.replace(/[^0-9+]/g,'');
   const mapHref = "https://www.google.com/maps/search/?api=1&query=" + enc(DATA.address);
   document.getElementById('telTop').href = telHref;
@@ -251,7 +245,7 @@
   document.getElementById('telBtn').href = telHref;
   document.getElementById('mapBtn').href = mapHref;
 
-  // こだわりカード
+  /* Features (about) */
   const featureWrap = document.getElementById('featureCards');
   DATA.features.forEach(f=>{
     const el = document.createElement('div');
@@ -261,16 +255,18 @@
     featureWrap.appendChild(el);
   });
 
-  // メニュー
+  /* Menu */
   const menuUl = document.getElementById('menuList');
-  DATA.menu.forEach(m=>{
-    const li = document.createElement('li');
-    li.style.margin = "6px 0";
-    li.innerHTML = `<strong>${m.name}</strong> …… ${m.price}` + (m.note ? ` <span style="color:#8a6b52">（${m.note}）</span>` : "");
-    menuUl.appendChild(li);
-  });
+  if (menuUl && Array.isArray(DATA.menu)) {
+    DATA.menu.forEach(m=>{
+      const li = document.createElement('li');
+      li.style.margin = "6px 0";
+      li.innerHTML = `<strong>${m.name}</strong> …… ${m.price}` + (m.note ? ` <span style="color:#8a6b52">（${m.note}）</span>` : "");
+      menuUl.appendChild(li);
+    });
+  }
 
-  // アクセス
+  /* Access */
   const tbl = document.getElementById('hoursTable');
   DATA.openHours.forEach(r=>{
     const tr = document.createElement('tr');
@@ -284,16 +280,17 @@
   const mailLink = document.getElementById('mailLink'); mailLink.href = "mailto:"+DATA.email; mailLink.textContent = DATA.email;
   document.getElementById('mapBtn2').href = mapHref;
 
-  // 地図（埋め込み）
+  /* Map */
   document.getElementById('mapFrame').src = "https://www.google.com/maps?q=" + enc(DATA.address) + "&output=embed";
 
-  // 店主
+  /* Owner */
   document.getElementById('ownerImg').src = DATA.images.owner;
   document.getElementById('ownerName').textContent = DATA.owner.name;
   document.getElementById('ownerIntro').textContent = DATA.owner.intro;
 
-  // お問い合わせ（mailto）
-  document.getElementById('contactForm').addEventListener('submit', (e)=>{
+  /* Contact (mailto) */
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
     const emailVal = document.getElementById('email').value.trim();
@@ -304,7 +301,7 @@
     window.location.href = href;
   });
 
-  // まとめ
+  /* Summary */
   document.getElementById('footerName').textContent = DATA.name;
   document.getElementById('year').textContent = new Date().getFullYear();
   document.getElementById('sumName').textContent = DATA.name;
@@ -312,13 +309,15 @@
   document.getElementById('sumAddr').textContent = DATA.address;
   document.getElementById('sumNearest').textContent = DATA.nearest;
   document.getElementById('sumParking').textContent = DATA.parking;
+
   const weekday = DATA.openHours.find(x=>x.d.includes("月") && x.h!=="定休日")?.h || "";
   const sat = DATA.openHours.find(x=>x.d.includes("土"))?.h || "";
   const sun = DATA.openHours.find(x=>x.d.includes("日") || x.d.includes("祝"))?.h || "";
   const closed = DATA.openHours.find(x=>x.h==="定休日")?.d || "";
   document.getElementById('sumHours').textContent = `平日 ${weekday} ／ 土 ${sat} ／ 日・祝 ${sun}` + (closed?`（${closed} 定休）`:"");
-  document.getElementById('sumInsta').href = DATA.sns?.instagram || "#";
-  document.getElementById('sumX').href = DATA.sns?.x || "#";
+
+  document.getElementById('sumInsta').href = DATA.sns.instagram || "#";
+  document.getElementById('sumX').href = DATA.sns.x || "#";
   document.getElementById('sumMap').href = mapHref;
 </script>
 </body>
