@@ -76,6 +76,27 @@
     .wrap > section { margin: 48px 0; }
 
     footer{padding:28px 18px 48px;text-align:center;color:#8a8a8a}
+
+    /* 上に戻るボタン */
+    #backToTop {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      z-index: 100;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.7em;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+      display: none;
+    }
+    #backToTop:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -237,6 +258,9 @@
 
 </main>
 
+<!-- 上に戻るボタン追加 -->
+<button id="backToTop" aria-label="上に戻る">↑</button>
+
 <footer>
   <div>© <span id="year"></span> <span id="footerName">（店名）</span></div>
 </footer>
@@ -330,6 +354,15 @@
   document.getElementById('sumInsta').href = DATA.sns?.instagram || "#";
   document.getElementById('sumX').href = DATA.sns?.x || "#";
   document.getElementById('sumMap').href = mapHref;
+
+  // 上に戻るボタンの表示・動作
+  const backBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+  });
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>
